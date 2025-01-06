@@ -17,7 +17,7 @@ const Input = styled.input`
   border-radius: 5px;
   border: 1px solid #ccc;
   width: 300px;
-  margin-right: 10px; /* Adicionando o espaço entre o input e o botão */
+  margin-right: 10px;
 `;
 
 const Button = styled.button`

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-// Container do formulário com uma sombra suave e bordas arredondadas
+
 const FormContainer = styled.div`
   margin: 40px auto;
   width: 400px;
@@ -11,7 +11,7 @@ const FormContainer = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 
-// Estilo para o título do formulário
+
 const FormTitle = styled.h2`
   text-align: center;
   font-family: 'Arial', sans-serif;
@@ -20,12 +20,12 @@ const FormTitle = styled.h2`
   margin-bottom: 20px;
 `;
 
-// Estilo para cada campo do formulário
+
 const FormField = styled.div`
   margin-bottom: 20px;
 `;
 
-// Estilo para os rótulos dos campos
+
 const Label = styled.label`
   font-size: 16px;
   color: #333;
@@ -34,7 +34,7 @@ const Label = styled.label`
   margin-bottom: 8px;
 `;
 
-// Estilo para o input
+
 const Input = styled.input`
   width: 100%;
   padding: 12px;
@@ -50,7 +50,7 @@ const Input = styled.input`
   }
 `;
 
-// Estilo para o botão
+
 const Button = styled.button`
   width: 100%;
   padding: 12px;
@@ -67,7 +67,6 @@ const Button = styled.button`
   }
 `;
 
-// Estilo para a mensagem de sucesso
 const SuccessMessage = styled.p`
   text-align: center;
   font-size: 18px;
@@ -75,7 +74,7 @@ const SuccessMessage = styled.p`
   margin-top: 20px;
 `;
 
-// Componente de formulário de cadastro
+
 const RegisterForm: React.FC<{ onCloseModal: () => void }> = ({ onCloseModal }) => {
   const [ip, setIp] = useState('');
   const [nome, setNome] = useState('');
@@ -94,8 +93,8 @@ const RegisterForm: React.FC<{ onCloseModal: () => void }> = ({ onCloseModal }) 
     if (response.ok) {
       setIsSuccess(true);
       setTimeout(() => {
-        onCloseModal(); // Fechar o modal após o sucesso
-      }, 2000); // Espera 2 segundos para mostrar a mensagem de sucesso
+        onCloseModal(); 
+      }, 2000); 
     } else {
       alert('Erro ao criar computador.');
     }
@@ -144,7 +143,7 @@ const RegisterForm: React.FC<{ onCloseModal: () => void }> = ({ onCloseModal }) 
         <Button type="submit">Cadastrar</Button>
       </form>
 
-      {/* Exibe a mensagem de sucesso */}
+    
       {isSuccess && <SuccessMessage>Computador cadastrado com sucesso!</SuccessMessage>}
     </FormContainer>
   );

@@ -46,10 +46,10 @@ app.get("/api/computers", async (_req: Request, res: Response) => {
 });
 
 app.put("/api/computers/:id", async (req: Request, res: Response) => {
-  const { id } = req.params; // Obtém o ID do computador da URL
-  const { ip, nome, anydeskId, setor } = req.body; // Dados para atualizar
+  const { id } = req.params; 
+  const { ip, nome, anydeskId, setor } = req.body; 
 
-  // Verifica se algum campo necessário foi fornecido
+
   if (!ip && !nome && !anydeskId && !setor) {
     return res.status(400).json({ error: "Pelo menos um campo para atualizar é necessário" });
   }
