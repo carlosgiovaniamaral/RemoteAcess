@@ -8,11 +8,13 @@ datasource db {
 }
 
 model Computer {
-  id        Int      @id @default(autoincrement())
-  ip        String
-  nome      String
-  anydeskId String
-  setor     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int      @id @default(autoincrement())
+  ip           String
+  nameComputer String
+  nameUser     String
+  anydeskId    String
+  setor        String
+  ramal        String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

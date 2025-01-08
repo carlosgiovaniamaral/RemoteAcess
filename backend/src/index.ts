@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from "express";
+import express, { Request, Response } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
@@ -6,26 +6,24 @@ import { PrismaClient } from "@prisma/client";
 
 dotenv.config();
 
-
 const prisma = new PrismaClient();
 const app = express();
 const port = 4000;
-
 
 app.use(cors());
 app.use(bodyParser.json());
 
 
 app.post("/api/computers", async (req: Request, res: Response) => {
-  const { ip, nome, anydeskId, setor } = req.body;
+  const { ip, nameComputer, nameUser, anydeskId, setor, ramal } = req.body;
 
-  if (!ip || !nome || !anydeskId || !setor) {
+  if (!ip || !setor || !nameComputer || !nameUser || ramal === undefined) {
     return res.status(400).json({ error: "Todos os campos são obrigatórios" });
   }
 
   try {
     const computer = await prisma.computer.create({
-      data: { ip, nome, anydeskId, setor },
+      data: { ip, nameComputer, nameUser, anydeskId, setor, ramal },
     });
     return res.status(201).json(computer);
   } catch (error) {
@@ -45,20 +43,19 @@ app.get("/api/computers", async (_req: Request, res: Response) => {
   }
 });
 
+
 app.put("/api/computers/:id", async (req: Request, res: Response) => {
-  const { id } = req.params; 
-  const { ip, nome, anydeskId, setor } = req.body; 
+  const { id } = req.params;
+  const { ip, nameComputer, nameUser, anydeskId, setor, ramal } = req.body;
 
-
-  if (!ip && !nome && !anydeskId && !setor) {
+  if (!ip && !nameComputer && !nameUser && !anydeskId && !setor && ramal === undefined) {
     return res.status(400).json({ error: "Pelo menos um campo para atualizar é necessário" });
   }
 
   try {
-
     const updatedComputer = await prisma.computer.update({
-      where: { id: Number(id) }, 
-      data: { ip, nome, anydeskId, setor },
+      where: { id: Number(id) },
+      data: { ip, nameComputer, nameUser, anydeskId, setor, ramal },
     });
 
     return res.status(200).json(updatedComputer);
@@ -67,7 +64,6 @@ app.put("/api/computers/:id", async (req: Request, res: Response) => {
     return res.status(500).json({ error: "Erro interno no servidor" });
   }
 });
-
 
 
 app.listen(port, () => {

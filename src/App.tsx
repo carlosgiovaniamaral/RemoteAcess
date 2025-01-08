@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import RegisterForm from './components/RegisterForm';
-import Header from './components/header';
-import ComputerList from './components/Computerlist';
+import RegisterForm from './components/RegisterForm/RegisterForm';
+import Header from './components/Header/header';
+import ComputerList from './components/ComputerList/Computerlist';
 
 // Modal Background
 const Modal = styled.div`
@@ -22,7 +22,7 @@ const Modal = styled.div`
 const ModalContent = styled.div`
   background-color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  max-width: 100%;
+  max-width: 80%;
   position: relative;
 `;
 
