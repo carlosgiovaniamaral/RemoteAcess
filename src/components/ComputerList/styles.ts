@@ -41,30 +41,38 @@ export const SuccessMessage = styled.div`
 
 export const ListContainer = styled.div`
   margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 `;
 
 export const ComputerItem = styled.div`
+  display: flex;
+  flex-direction: column; /* Coluna para garantir alinhamento responsivo */
   padding: 15px;
   border: 1px solid #ccc;
-  margin-bottom: 15px;
   border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  gap: 10px; /* Espaço entre os itens */
+  background-color: #fff;
+
+  @media (min-width: 768px) {
+    flex-direction: row; /* Linha para telas maiores */
+    justify-content: space-between;
+    align-items: center;
+  }
 `;
 
 export const InfoContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px; /* Espaço entre os itens */
+  width: 100%; /* Garante que ocupe toda a largura disponível */
 `;
 
 export const Info = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: 15px;
 `;
 
 export const Label = styled.span`
@@ -75,7 +83,9 @@ export const Label = styled.span`
 export const Value = styled.span`
   color: #555;
   font-size: 16px;
+  word-wrap: break-word; /* Quebra textos muito longos */
 `;
+
 
 export const Button = styled.button`
   background-color: #4caf50;
@@ -84,7 +94,7 @@ export const Button = styled.button`
   gap: 5px;
   padding: 10px 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 12px;
   border-radius: 5px;
   width: 130px;
 
@@ -126,7 +136,7 @@ export const Input = styled.input`
   font-size: 16px;
   border-radius: 8px;
   border: 1px solid #ccc;
-  width: 100%;
+  width: auto;
   margin-bottom: 15px;
 
   &:focus {

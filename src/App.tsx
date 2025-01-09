@@ -26,24 +26,7 @@ const ModalContent = styled.div`
   position: relative;
 `;
 
-// Botão de Fechar Modal
-const CloseButton = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: #f44336;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
 
-  &:hover {
-    background-color: #d32f2f;
-  }
-`;
 
 const App: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -72,7 +55,7 @@ const App: React.FC = () => {
       {isModalOpen && (
         <Modal>
           <ModalContent>
-            <CloseButton onClick={handleCloseModal}>X</CloseButton>
+
             {/* Passando a função handleCloseModal para o RegisterForm */}
             <RegisterForm onCloseModal={handleCloseModal} />
           </ModalContent>
