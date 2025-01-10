@@ -10,7 +10,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ onSearch, onOpenModal }) => {
   return (
     <HeaderContainer>
-      <h1>Gerenciamento de Computadores</h1>
+      <h1>RemoteAcess</h1>
       <div>
         <Input
           type="text"

@@ -1,12 +1,17 @@
-import styled from 'styled-components';
+import styled from 'styled-components'; 
 
 export const HeaderContainer = styled.header`
   background-color: #4caf50;
   padding: 20px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   color: white;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 `;
 
 export const Input = styled.input`
@@ -14,8 +19,14 @@ export const Input = styled.input`
   font-size: 16px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  width: 300px;
-  margin-right: 10px;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 10px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+    margin-right: 10px;
+  }
 `;
 
 export const Button = styled.button`
