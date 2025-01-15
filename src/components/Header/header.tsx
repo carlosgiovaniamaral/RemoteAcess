@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Button, HeaderContainer, Input } from './styles';
+import { Button, Container, HeaderContainer, Input } from './styles';
 
 interface HeaderProps {
   onSearch: (query: string) => void;
@@ -11,14 +11,14 @@ const Header: React.FC<HeaderProps> = ({ onSearch, onOpenModal }) => {
   return (
     <HeaderContainer>
       <h1>RemoteAcess</h1>
-      <div>
+      <Container>
         <Input
           type="text"
           placeholder="Buscar por nome, IP ou AnyDesk..."
           onChange={(e) => onSearch(e.target.value)}
         />
         <Button onClick={onOpenModal}>Cadastrar Computador</Button>
-      </div>
+      </Container>
     </HeaderContainer>
   );
 };

@@ -3,9 +3,7 @@ import styled from 'styled-components';
 export const HeaderContainer = styled.header`
   background-color: #4caf50;
   padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+ 
   color: white;
 
   @media (min-width: 768px) {
@@ -13,6 +11,14 @@ export const HeaderContainer = styled.header`
     justify-content: space-between;
   }
 `;
+
+export const Container = styled.div`
+display: flex;
+align-items: center;
+justify-content: space-between;
+
+`
+
 
 export const Input = styled.input`
   padding: 10px;
