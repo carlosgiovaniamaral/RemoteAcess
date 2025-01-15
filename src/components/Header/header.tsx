@@ -1,6 +1,6 @@
-
 import React from 'react';
-import { Button, Container, HeaderContainer, Input } from './styles';
+import { Button, Container, HeaderContainer, Input, TitleHeader } from './styles';
+import { IoMdArrowForward } from 'react-icons/io';
 
 interface HeaderProps {
   onSearch: (query: string) => void;
@@ -10,7 +10,10 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ onSearch, onOpenModal }) => {
   return (
     <HeaderContainer>
-      <h1>RemoteAcess</h1>
+      <TitleHeader>
+        RemoteAcess
+      </TitleHeader>
+      <IoMdArrowForward style={{ width: '30px', height: '25', marginLeft: '8px' }} />
       <Container>
         <Input
           type="text"

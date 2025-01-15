@@ -18,6 +18,9 @@ align-items: center;
 justify-content: space-between;
 
 `
+export const TitleHeader = styled.h1`
+display: inline-block;
+`
 
 
 export const Input = styled.input`
