@@ -52,13 +52,12 @@ export const ListContainer = styled.div`
 
 export const ComputerItem = styled.div`
   display: flex;
+  padding: 10px;
   flex-direction: column; /* Coluna para garantir alinhamento responsivo */
-  padding: 15px;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   gap: 10px; /* Espaço entre os itens */
-  background-color: #fff;
   width: 100%; /* Garante que ocupe a largura disponível */
 
   @media (min-width: 768px) {
@@ -75,8 +74,7 @@ export const ComputerItem = styled.div`
 export const InfoContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 10px; /* Espaço entre os itens */
-  width: 100%; /* Garante que ocupe toda a largura disponível */
+  width: 70%; /* Garante que ocupe toda a largura disponível */
 `;
 
 export const Info = styled.div`
