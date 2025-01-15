@@ -19,16 +19,18 @@ const RegisterForm: React.FC<{ onCloseModal: () => void }> = ({ onCloseModal }) 
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ip, nameComputer, nameUser, anydeskId, setor, ramal }),
     });
-
+  
     if (response.ok) {
       setIsSuccess(true);
       setTimeout(() => {
         onCloseModal();
+        window.location.reload(); // Recarrega a página
       }, 2000);
     } else {
       alert('Erro ao criar computador.');
     }
   };
+  
 
   return (
     <FormContainer>
@@ -45,7 +47,7 @@ const RegisterForm: React.FC<{ onCloseModal: () => void }> = ({ onCloseModal }) 
           />
         </FormField>
         <FormField>
-          <Label>Nome</Label>
+          <Label>Nome do computador</Label>
           <Input
             type="text"
             value={nameComputer}

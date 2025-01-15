@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch, onOpenModal }) => {
       <Container>
         <Input
           type="text"
-          placeholder="Buscar por nome, IP ou AnyDesk..."
+          placeholder="Buscar computador..."
           onChange={(e) => onSearch(e.target.value)}
         />
         <Button onClick={onOpenModal}>Cadastrar Computador</Button>

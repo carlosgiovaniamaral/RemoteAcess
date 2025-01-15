@@ -44,6 +44,7 @@ app.get("/api/computers", async (_req: Request, res: Response) => {
 });
 
 
+
 app.put("/api/computers/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
   const { ip, nameComputer, nameUser, anydeskId, setor, ramal } = req.body;
@@ -61,6 +62,18 @@ app.put("/api/computers/:id", async (req: Request, res: Response) => {
     return res.status(200).json(updatedComputer);
   } catch (error) {
     console.error("Erro ao atualizar computador:", error);
+    return res.status(500).json({ error: "Erro interno no servidor" });
+  }
+});
+app.delete("/api/computers/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const deletedComputer = await prisma.computer.delete({
+      where: { id: Number(id) },
+    });
+    return res.status(200).json({ message: "Computador deletado com sucesso", deletedComputer });
+  } catch (error) {
+    console.error("Erro ao deletar computador:", error);
     return res.status(500).json({ error: "Erro interno no servidor" });
   }
 });

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaClipboard } from 'react-icons/fa'; // Ícone de clipboard
+import { FaClipboard, FaTrashAlt } from 'react-icons/fa'; // Ícone de clipboard
 
 import {
   SuccessMessage,
@@ -20,6 +20,7 @@ import {
   FormGroup,
   ContainerButtons,
   ButtonCancel,
+  DeleteButton,
 } from './styles';
 
 interface Computer {
@@ -49,6 +50,8 @@ const ComputerList: React.FC<ComputerListProps> = ({ searchQuery }) => {
     nameComputer: '',
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Modal de confirmação de deleção
+  const [computerToDelete, setComputerToDelete] = useState<Computer | null>(null); // Computador a ser deletado
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   // Busca inicial dos computadores
@@ -157,14 +160,11 @@ const ComputerList: React.FC<ComputerListProps> = ({ searchQuery }) => {
   const handleRemoteAccess = (anydeskId: string | null, ip: string | null) => {
     try {
       if (anydeskId) {
-      
         const anydeskLink = `anydesk://${anydeskId}`;
         window.location.href = anydeskLink;
       } else if (ip) {
         const vncexe = `vnc://${ip}`;
         window.location.href = vncexe;
-        
-      
       } else {
         alert("Não foi possível identificar o AnyDesk ou IP para conexão remota.");
       }
@@ -175,8 +175,53 @@ const ComputerList: React.FC<ComputerListProps> = ({ searchQuery }) => {
       );
     }
   };
-  
-  
+
+  const handlePing = (ip: string) => {
+    const cmd = `ping ${ip} -t`;
+    const shell = require('child_process').exec;
+    shell(cmd, (error: any, stdout: string, stderr: string) => {
+      if (error) {
+        console.error(`Erro ao executar o comando ping: ${stderr}`);
+        alert('Erro ao executar o comando ping.');
+      } else {
+        console.log(stdout);
+      }
+    });
+  };
+
+  const handleDeleteClick = (computer: Computer) => {
+    setComputerToDelete(computer);
+    setIsDeleteModalOpen(true); // Abre o modal de confirmação
+  };
+
+  const handleConfirmDelete = () => {
+    if (computerToDelete) {
+      fetch(`http://localhost:4000/api/computers/${computerToDelete.id}`, {
+        method: 'DELETE',
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Erro ao deletar: ${response.statusText}`);
+          }
+          return response.json();
+        })
+        .then(() => {
+          setComputers((prevComputers) =>
+            prevComputers.filter((computer) => computer.id !== computerToDelete.id)
+          );
+          setIsDeleteModalOpen(false); // Fecha o modal de confirmação
+        })
+        .catch((error) => {
+          console.error('Erro ao deletar computador:', error);
+          alert('Erro ao deletar computador');
+        });
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setIsDeleteModalOpen(false); // Fecha o modal de confirmação
+    setComputerToDelete(null); // Limpa o computador selecionado para exclusão
+  };
 
   return (
     <div>
@@ -223,13 +268,36 @@ const ComputerList: React.FC<ComputerListProps> = ({ searchQuery }) => {
               <Button onClick={() => handleRemoteAccess(computer.anydeskId, computer.ip)}>
                 Acesso Remoto
               </Button>
+              <Button style={{ backgroundColor: 'blue' }} onClick={() => handlePing(computer.ip)}>
+                Ping
+              </Button>
               <EditButton onClick={() => handleEditClick(computer)}>Editar</EditButton>
+              <DeleteButton onClick={() => handleDeleteClick(computer)}>
+                <FaTrashAlt style={{ marginRight: '8px' }} />
+                Deletar
+              </DeleteButton>
             </ComputerItem>
           ))
         ) : (
           <p>Não há computadores correspondentes à pesquisa.</p>
         )}
       </ListContainer>
+
+      {/* Modal de confirmação de deleção */}
+      {isDeleteModalOpen && (
+        <Modal>
+          <ModalContent>
+            <CloseButton onClick={handleCancelDelete}>X</CloseButton>
+            <FormContainer>
+              <FormTitle>Tem certeza que deseja deletar este computador?</FormTitle>
+              <ContainerButtons>
+                <Button onClick={handleConfirmDelete}>Sim, deletar</Button>
+                <ButtonCancel onClick={handleCancelDelete}>Cancelar</ButtonCancel>
+              </ContainerButtons>
+            </FormContainer>
+          </ModalContent>
+        </Modal>
+      )}
 
       {isModalOpen && (
         <Modal>

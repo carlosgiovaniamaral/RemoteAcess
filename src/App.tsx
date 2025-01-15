@@ -55,7 +55,6 @@ const App: React.FC = () => {
       {isModalOpen && (
         <Modal>
           <ModalContent>
-
             {/* Passando a função handleCloseModal para o RegisterForm */}
             <RegisterForm onCloseModal={handleCloseModal} />
           </ModalContent>

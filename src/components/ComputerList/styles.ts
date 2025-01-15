@@ -44,6 +44,10 @@ export const ListContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+
+  @media (max-width: 768px) {
+    margin: 10px;
+  }
 `;
 
 export const ComputerItem = styled.div`
@@ -55,11 +59,16 @@ export const ComputerItem = styled.div`
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   gap: 10px; /* Espaço entre os itens */
   background-color: #fff;
+  width: 100%; /* Garante que ocupe a largura disponível */
 
   @media (min-width: 768px) {
     flex-direction: row; /* Linha para telas maiores */
     justify-content: space-between;
     align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px;
   }
 `;
 
@@ -86,6 +95,25 @@ export const Value = styled.span`
   word-wrap: break-word; /* Quebra textos muito longos */
 `;
 
+export const DeleteButton = styled.button`
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: darkred;
+  }
+
+  @media (max-width: 768px) {
+    padding: 8px 12px;
+  }
+`;
 
 export const Button = styled.button`
   background-color: #4caf50;
@@ -101,11 +129,20 @@ export const Button = styled.button`
   &:hover {
     background-color: #45a049;
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 10px;
+  }
 `;
 
 export const ContainerButtons = styled.div`
   display: flex;
   gap: 10px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const ButtonCancel = styled.button`
@@ -121,6 +158,11 @@ export const ButtonCancel = styled.button`
 
   &:hover {
     background-color: #ff8c00;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 10px;
   }
 `;
 
@@ -143,6 +185,11 @@ export const Input = styled.input`
     outline: none;
     border-color: #4caf50;
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 10px;
+  }
 `;
 
 export const Modal = styled.div`
@@ -163,8 +210,12 @@ export const ModalContent = styled.div`
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-
   position: relative;
+  width: 90%; /* Adicionando um limite para a largura do modal */
+
+  @media (min-width: 768px) {
+    width: 50%; /* Modal será menor em telas grandes */
+  }
 `;
 
 export const CloseButton = styled.button`
@@ -203,3 +254,4 @@ export const FormGroup = styled.div`
   flex-direction: column;
   margin-bottom: 15px;
 `;
+
