@@ -157,17 +157,14 @@ const ComputerList: React.FC<ComputerListProps> = ({ searchQuery }) => {
   const handleRemoteAccess = (anydeskId: string | null, ip: string | null) => {
     try {
       if (anydeskId) {
-        // Tentar abrir o AnyDesk
+      
         const anydeskLink = `anydesk://${anydeskId}`;
         window.location.href = anydeskLink;
       } else if (ip) {
-        // Tentar abrir o UltraVNC Viewer
-        const ultraVncPath = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\UltraVNC\\UltraVNC Viewer.exe";
-        const command = `${ultraVncPath} ${ip}`;
+        const vncexe = `vnc://${ip}`;
+        window.location.href = vncexe;
         
-        // Redirecionar para o comando do UltraVNC
-        const ultraVncLink = `file:///${command}`;
-        window.location.href = ultraVncLink;
+      
       } else {
         alert("Não foi possível identificar o AnyDesk ou IP para conexão remota.");
       }
@@ -178,6 +175,7 @@ const ComputerList: React.FC<ComputerListProps> = ({ searchQuery }) => {
       );
     }
   };
+  
   
 
   return (
